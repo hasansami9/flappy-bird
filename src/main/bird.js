@@ -12,6 +12,7 @@ const Main = () => {
     let gravity = 0.11
     let score = 0
     let once = true
+    let end = false
     let pause = false
     let audio = document.getElementById("hit")
     let ball = { x: window.innerWidth / 4 - 10, y: window.innerHeight / 2 - 5, r: 10, sAngle: 0, eAngle: 2 * Math.PI, c: null }
@@ -36,19 +37,21 @@ const Main = () => {
                     dy = -5.5
                 }
             }
-            if (e.keyCode === 27) {
-                if (!once && !pause) {
-                    once = true
-                    pause = true
-                    ctx.font = "3em cursive"
-                    ctx.fillStyle = "black"
-                    ctx.textAlign = "center"
-                    ctx.fillText('PAUSED', canvas.width / 2, canvas.height / 2)
-                    clearInterval(draw);
-                } else if (once && pause) {
-                    once = false
-                    pause = false
-                    interval()
+            if (!end) {
+                if (e.keyCode === 27) {
+                    if (!once && !pause) {
+                        once = true
+                        pause = true
+                        ctx.font = "3em cursive"
+                        ctx.fillStyle = "black"
+                        ctx.textAlign = "center"
+                        ctx.fillText('PAUSED', canvas.width / 2, canvas.height / 2)
+                        clearInterval(draw);
+                    } else if (once && pause) {
+                        once = false
+                        pause = false
+                        interval()
+                    }
                 }
             }
         })
@@ -157,6 +160,7 @@ const Main = () => {
             if (ball.y < (bup.y + 680) && ball.y > (bup.y + 500) && ball.x <= bup.x + 100 && ball.x >= bup.x + 98) score++
             if (colliding(bup) || colliding(bd) || ball.y < -100 || ball.y + ball.r >= canvas.height) {
                 audio.play()
+                end = true
                 ctx.clearRect(-canvas.width, -canvas.height, canvas.width * 2, canvas.height * 2)
                 if (localStorage.getItem("highscore") < score) {
                     localStorage.setItem("highscore", score)
