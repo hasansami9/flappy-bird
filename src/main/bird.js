@@ -14,7 +14,8 @@ const Main = () => {
     let once = true
     let end = false
     let pause = false
-    let audio = document.getElementById("hit")
+    let hit = document.getElementById("hit")
+    let fly = document.getElementById("fly")
     let ball = { x: window.innerWidth / 4 - 10, y: window.innerHeight / 2 - 5, r: 10, sAngle: 0, eAngle: 2 * Math.PI, c: null }
     let bup = { x: null, y: null, w: 100, h: 500 }
     let bd = { x: null, y: null, w: 100, h: 500 }
@@ -30,11 +31,12 @@ const Main = () => {
         document.addEventListener('keydown' || "touchstart", async function (e) {
             if (e.keyCode === 32 && pause == false) {
                 dy = 2
+                fly.play()
                 if (once) {
                     once = false
                 }
                 if (dy > 0) {
-                    dy = -5.5
+                    dy = -4.20
                 }
             }
             if (!end) {
@@ -65,7 +67,7 @@ const Main = () => {
         bup.x = canvas.width + 10
         bd.x = canvas.width + 10
         bup.y = randomInt(-50, -400)
-        bd.y = bup.y + 660
+        bd.y = bup.y + 686
 
     }, [canvas])
 
@@ -159,7 +161,7 @@ const Main = () => {
             }
             if (ball.y < (bup.y + 680) && ball.y > (bup.y + 500) && ball.x <= bup.x + 100 && ball.x >= bup.x + 98) score++
             if (colliding(bup) || colliding(bd) || ball.y < -100 || ball.y + ball.r >= canvas.height) {
-                audio.play()
+                hit.play()
                 end = true
                 ctx.clearRect(-canvas.width, -canvas.height, canvas.width * 2, canvas.height * 2)
                 if (localStorage.getItem("highscore") < score) {
