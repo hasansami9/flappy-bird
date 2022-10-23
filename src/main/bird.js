@@ -67,7 +67,7 @@ const Main = () => {
         bup.x = canvas.width + 10
         bd.x = canvas.width + 10
         bup.y = randomInt(-50, -400)
-        bd.y = bup.y + 686
+        bd.y = bup.y + 669
 
     }, [canvas])
 
@@ -155,7 +155,7 @@ const Main = () => {
 
             if (bup.x === -110) {
                 bup.y = randomInt(-50, -400)
-                bd.y = bup.y + 660
+                bd.y = bup.y + 669
                 bup.x = canvas.width + 10
                 bd.x = canvas.width + 10
             }
