@@ -40,7 +40,7 @@ const Main = () => {
                 }
             }
             if (!end) {
-                if (e.keyCode === 27) {
+                if (e.keyCode == 27) {
                     if (!once && !pause) {
                         once = true
                         pause = true
